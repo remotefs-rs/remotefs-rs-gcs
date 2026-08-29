@@ -2,12 +2,14 @@
 
 All notable changes to this project are documented in this file.
 
-## Unreleased
-
 ## 0.1.0
 
-Released on 2026-08-28
+Released on 2026-08-29
 
 ### Added
 
-- Initial Rust project template.
+- add Google Cloud Storage client
+
+### Changed
+
+- remove useless mod visibility
