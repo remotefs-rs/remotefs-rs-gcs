@@ -58,6 +58,9 @@ jobs:
         run: just build
       - name: Test
         run: just test
+      - name: Integration tests
+        if: runner.os == 'Linux'
+        run: just integration
       - name: Lint
         run: just lint "-- -D warnings"
 

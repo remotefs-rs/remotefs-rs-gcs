@@ -4,6 +4,11 @@ test args="":
   cargo test --all-targets {{ args }}
   cargo test --doc {{ args }}
 
+# Run emulator-backed integration tests.
+[group('test')]
+integration:
+  cargo test --test gcs --features with-containers -- --test-threads=1
+
 # Generate an LCOV coverage report.
 [group('test')]
 coverage output="lcov.info":
