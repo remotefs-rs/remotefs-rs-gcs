@@ -58,11 +58,28 @@ jobs:
         run: just build
       - name: Test
         run: just test
-      - name: Integration tests
-        if: runner.os == 'Linux'
-        run: just integration
       - name: Lint
         run: just lint "-- -D warnings"
+
+  integration:
+    name: Integration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Cache Cargo data
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - name: Install just
+        uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4
+      - name: Run integration tests
+        run: just integration
 
   documentation:
     name: Documentation
