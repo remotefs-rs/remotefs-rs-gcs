@@ -7,7 +7,7 @@ test args="":
 # Run emulator-backed integration tests.
 [group('test')]
 integration test_args="":
-  cargo test --test gcs --features with-containers -- {{ test_args }} --test-threads=1
+  cargo test --features with-containers,tokio --test gcs --test gcs_blocking -- {{ test_args }} --test-threads=1
 
 # Generate an LCOV coverage report.
 [group('test')]
