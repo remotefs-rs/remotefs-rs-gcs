@@ -84,7 +84,7 @@ fn slash(path: &Path) -> RemoteResult<String> {
     #[cfg(target_os = "windows")]
     {
         path_slash::PathExt::to_slash(path)
-            .map(|value| value.into_owned())
+            .map(std::borrow::Cow::into_owned)
             .ok_or_else(|| {
                 RemoteError::with_message(
                     RemoteErrorType::InvalidPath,
